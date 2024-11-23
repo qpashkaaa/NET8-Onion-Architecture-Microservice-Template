@@ -1,5 +1,5 @@
 # What It This?
-  **The template ASP .NET 8 Core API microservice which is built by Onion Architecture.**
+  **The template ASP.NET 8 Core API microservice which is built by Onion Architecture.**
   >*In this solution, dependencies between libraries are immediately set in accordance with Onion Architecture. This template makes it easy to deploy a microservice project with the name you choose. All you need to do is download the project and execute Initializer.exe - Python script to replace the rods in your name.*
 
 # How do I deploy the template?
@@ -13,9 +13,9 @@
 # Screenshots
 ![image](https://github.com/user-attachments/assets/586178e0-71f4-4112-870a-2672f84d416d)
 _____
-![image](https://github.com/user-attachments/assets/4fc06ba0-6281-41cb-8bce-bff68406e05b)
+![image](https://github.com/user-attachments/assets/1382bcea-3dd8-4c4b-9714-e03cb1074939)
 _____
-![image](https://github.com/user-attachments/assets/5d97e5e3-c9f5-4df1-9423-936b144f0d1e)
+![image](https://github.com/user-attachments/assets/4b66d246-630c-49c3-a454-b5ebb45403f5)
 _____
 ![image](https://github.com/user-attachments/assets/dc7dc1a5-9225-4ea1-be43-fb7cdf8f30b2)
 _____
