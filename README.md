@@ -3,7 +3,7 @@
   >*In this solution, dependencies between libraries are immediately set in accordance with Onion Architecture. This template makes it easy to deploy a microservice project with the name you choose. All you need to do is download the project and execute Initializer.exe - Python script to replace the rods in your name.*
 
 # How do I deploy the template?
-- Upload a project from GitHub (*git clone https://github.com/qpashkaaa/NET8-Onion-Architecture-Microservice-Template.git*).
+- Upload a project from *GitHub* (*git clone https://github.com/qpashkaaa/NET8-Onion-Architecture-Microservice-Template.git*).
 - Go to the root of the uploaded project.
 - Run the file ***Initializer.exe*** - a console application written in Python that allows you to replace the tag in the project name with your own name (the Python script code itself is presented below).
 - Follow the instructions provided in the application.
@@ -32,6 +32,88 @@ _____
 > To make the deployment of the microservice even more enjoyable, you can use our library, which is located in NuGet - ***AspNetCoreMicroserviceInitializer.TradingDesk***.
 - [Project on GitHub and docs](https://github.com/qpashkaaa/Asp-Net-Core-Microservice-Initializer)
 - [NuGet link](https://www.nuget.org/packages/AspNetCoreMicroserviceInitializer.TradingDesk/1.0.0)
+
+## Python script
+```Python
+import os
+import sys
+
+
+def replace_in_filenames_and_content(directory, placeholder, new_name):
+    for root, dirs, files in os.walk(directory):
+        for i, dir_name in enumerate(dirs):
+            if placeholder in dir_name:
+                new_dir_name = dir_name.replace(placeholder, new_name)
+                old_path = os.path.join(root, dir_name)
+                new_path = os.path.join(root, new_dir_name)
+                os.rename(old_path, new_path)
+                dirs[i] = new_dir_name
+
+        for file_name in files:
+            old_file_path = os.path.join(root, file_name)
+
+            with open(old_file_path, 'r', encoding='utf-8', errors='ignore') as file:
+                content = file.read()
+                new_content = content.replace(placeholder, new_name)
+
+            if content != new_content:
+                with open(old_file_path, 'w', encoding='utf-8') as file:
+                    file.write(new_content)
+
+            if placeholder in file_name:
+                new_file_name = file_name.replace(placeholder, new_name)
+                new_file_path = os.path.join(root, new_file_name)
+                os.rename(old_file_path, new_file_path)
+
+
+def error_handling(text):
+    print("\n")
+    print(text)
+    input("Press any button to restart the program...")
+    main()
+
+
+def main():
+    os.system('cls')
+
+    placeholder = None
+    current_directory = os.getcwd()
+
+    print(f"Current directory: {current_directory}")
+    print("\n")
+    print("Select an action:")
+    print("1. Use a standard tag to replace ($safeprojectname$).")
+    print("2. Use your own tag to replace.")
+    print("\n")
+
+    choice = input("Enter your choice (1 or 2): ").strip()
+
+    if choice == "1":
+        placeholder = "$safeprojectname$"
+    elif choice == "2":
+        placeholder = input("Enter the replacement tag: ").strip()
+        if not placeholder:
+            error_handling("Error: the tag cannot be empty!")
+    else:
+        error_handling("Error: the wrong item is selected!")
+
+    print("\n")
+    new_name = input("Enter new project name: ").strip()
+
+    if not new_name:
+        error_handling("Error: the new name cannot be empty!")
+
+    replace_in_filenames_and_content(current_directory, placeholder, new_name)
+
+    print("\n")
+    input("The replacement is complete. To finish, press any key...")
+
+    sys.exit()
+
+
+if __name__ == "__main__":
+    main()
+```
 
 ## Tech Stack
 - **.NET 8**
