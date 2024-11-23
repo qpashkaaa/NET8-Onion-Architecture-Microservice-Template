@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>$safeprojectname$.Server</AssemblyName>
+    <RootNamespace>$safeprojectname$.Server</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\$safeprojectname$.Core\$safeprojectname$.Core.csproj" />
+    <ProjectReference Include="..\$safeprojectname$.Shared\$safeprojectname$.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

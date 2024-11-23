@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>$safeprojectname$.Database</AssemblyName>
+    <RootNamespace>$safeprojectname$.Database</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\$safeprojectname$.Domain\$safeprojectname$.Domain.csproj" />
+    <ProjectReference Include="..\$safeprojectname$.Settings\$safeprojectname$.Settings.csproj" />
+  </ItemGroup>
+
+</Project>
