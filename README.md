@@ -38,6 +38,7 @@ _____
 import os
 import sys
 import shutil
+import stat
 
 
 def replace_in_filenames_and_content(directory, placeholder, clear_placeholder, new_name):
@@ -67,12 +68,17 @@ def replace_in_filenames_and_content(directory, placeholder, clear_placeholder, 
                 os.rename(old_file_path, new_file_path)
 
 
+def remove_readonly(func, path, excinfo):
+    os.chmod(path, stat.S_IWRITE)
+    func(path)
+
+
 def remove_git_related_files(directory):
     git_dir = os.path.join(directory, ".git")
     files_to_remove = ["README.md", ".gitattributes", ".gitignore"]
 
     if os.path.exists(git_dir) and os.path.isdir(git_dir):
-        shutil.rmtree(git_dir)
+        shutil.rmtree(git_dir, onerror=remove_readonly)
         print(f"Removed directory: {git_dir}")
 
     for file_name in files_to_remove:
@@ -98,14 +104,14 @@ def main():
     print(f"Current directory: {current_directory}")
     print("\n")
     print("Select an action:")
-    print("1. Use a standard tag to replace ($safeprojectname$).")
+    print("1. Use a standard tag to replace (Test).")
     print("2. Use your own tag to replace.")
     print("\n")
 
     choice = input("Enter your choice (1 or 2): ").strip()
 
     if choice == "1":
-        placeholder = "$safeprojectname$"
+        placeholder = "Test"
     elif choice == "2":
         placeholder = input("Enter the replacement tag: ").strip()
         if not placeholder:
@@ -127,13 +133,14 @@ def main():
     print("The replacement is complete. ")
 
     print("\n")
-    delete_git_choice = input("Delete files related to .git (if available)? (y/n)")
+    delete_git_choice = input("Delete files related to .git (if available)? (y/n): ")
 
     if delete_git_choice == 'y':
+        print("\n")
         remove_git_related_files(current_directory)
 
     print("\n")
-    input("Files related to .git deleted. To finish, press any key...")
+    input("To finish, press any key...")
 
     sys.exit()
 
