@@ -1,4 +1,4 @@
-namespace FactsMicroservice.Migrator;
+namespace safeprojectname.Migrator;
 
 public class Program
 {

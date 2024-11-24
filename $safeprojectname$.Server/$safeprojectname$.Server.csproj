@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\$safeprojectname$.Core\$safeprojectname$.Core.csproj" />
+    <ProjectReference Include="..\$safeprojectname$.Shared\$safeprojectname$.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\$safeprojectname$.Core\$safeprojectname$.Core.csproj" />
-    <ProjectReference Include="..\$safeprojectname$.Shared\$safeprojectname$.Shared.csproj" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-namespace CatsFactsMicroservice;
+namespace safeprojectname.Server;
 
 public class Program
 {
