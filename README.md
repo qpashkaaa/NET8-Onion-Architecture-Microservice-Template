@@ -104,14 +104,14 @@ def main():
     print(f"Current directory: {current_directory}")
     print("\n")
     print("Select an action:")
-    print("1. Use a standard tag to replace (Test).")
+    print("1. Use a standard tag to replace ($safeprojectname$).")
     print("2. Use your own tag to replace.")
     print("\n")
 
     choice = input("Enter your choice (1 or 2): ").strip()
 
     if choice == "1":
-        placeholder = "Test"
+        placeholder = "$safeprojectname$"
     elif choice == "2":
         placeholder = input("Enter the replacement tag: ").strip()
         if not placeholder:
