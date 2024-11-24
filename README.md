@@ -29,9 +29,9 @@ _____
 - **After changing the names of the projects, the file *Initializer.exe* you can delete it from the project if it is no longer needed.**
 
 ## About my library (NuGet)
-> To make the deployment of the microservice even more enjoyable, you can use our library, which is located in NuGet - ***AspNetCoreMicroserviceInitializer.TradingDesk***.
+> To make the deployment of the microservice even more enjoyable, you can use our library, which is located in NuGet - ***AspNetCoreMicroserviceInitializer.Registrations***.
 - [Project on GitHub and docs](https://github.com/qpashkaaa/Asp-Net-Core-Microservice-Initializer)
-- [NuGet link](https://www.nuget.org/packages/AspNetCoreMicroserviceInitializer.TradingDesk/1.0.0)
+- [NuGet link](https://www.nuget.org/packages/AspNetCoreMicroserviceInitializer.Registrations)
 
 ## Python script
 ```Python
