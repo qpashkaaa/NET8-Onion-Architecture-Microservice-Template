@@ -37,9 +37,10 @@ _____
 ```Python
 import os
 import sys
+import shutil
 
 
-def replace_in_filenames_and_content(directory, placeholder, new_name):
+def replace_in_filenames_and_content(directory, placeholder, clear_placeholder, new_name):
     for root, dirs, files in os.walk(directory):
         for i, dir_name in enumerate(dirs):
             if placeholder in dir_name:
@@ -54,7 +55,7 @@ def replace_in_filenames_and_content(directory, placeholder, new_name):
 
             with open(old_file_path, 'r', encoding='utf-8', errors='ignore') as file:
                 content = file.read()
-                new_content = content.replace(placeholder, new_name)
+                new_content = content.replace(placeholder, new_name).replace(clear_placeholder, new_name)
 
             if content != new_content:
                 with open(old_file_path, 'w', encoding='utf-8') as file:
@@ -64,6 +65,21 @@ def replace_in_filenames_and_content(directory, placeholder, new_name):
                 new_file_name = file_name.replace(placeholder, new_name)
                 new_file_path = os.path.join(root, new_file_name)
                 os.rename(old_file_path, new_file_path)
+
+
+def remove_git_related_files(directory):
+    git_dir = os.path.join(directory, ".git")
+    files_to_remove = ["README.md", ".gitattributes", ".gitignore"]
+
+    if os.path.exists(git_dir) and os.path.isdir(git_dir):
+        shutil.rmtree(git_dir)
+        print(f"Removed directory: {git_dir}")
+
+    for file_name in files_to_remove:
+        file_path = os.path.join(directory, file_name)
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            os.remove(file_path)
+            print(f"Removed file: {file_path}")
 
 
 def error_handling(text):
@@ -82,14 +98,14 @@ def main():
     print(f"Current directory: {current_directory}")
     print("\n")
     print("Select an action:")
-    print("1. Use a standard tag to replace ($safeprojectname$).")
+    print("1. Use a standard tag to replace (Test).")
     print("2. Use your own tag to replace.")
     print("\n")
 
     choice = input("Enter your choice (1 or 2): ").strip()
 
     if choice == "1":
-        placeholder = "$safeprojectname$"
+        placeholder = "Test"
     elif choice == "2":
         placeholder = input("Enter the replacement tag: ").strip()
         if not placeholder:
@@ -103,7 +119,11 @@ def main():
     if not new_name:
         error_handling("Error: the new name cannot be empty!")
 
-    replace_in_filenames_and_content(current_directory, placeholder, new_name)
+    clear_placeholder = placeholder.replace('$', "")
+
+    replace_in_filenames_and_content(current_directory, placeholder, clear_placeholder, new_name)
+
+    remove_git_related_files(current_directory)
 
     print("\n")
     input("The replacement is complete. To finish, press any key...")
