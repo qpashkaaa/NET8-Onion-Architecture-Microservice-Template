@@ -98,14 +98,14 @@ def main():
     print(f"Current directory: {current_directory}")
     print("\n")
     print("Select an action:")
-    print("1. Use a standard tag to replace (Test).")
+    print("1. Use a standard tag to replace ($safeprojectname$).")
     print("2. Use your own tag to replace.")
     print("\n")
 
     choice = input("Enter your choice (1 or 2): ").strip()
 
     if choice == "1":
-        placeholder = "Test"
+        placeholder = "$safeprojectname$"
     elif choice == "2":
         placeholder = input("Enter the replacement tag: ").strip()
         if not placeholder:
@@ -123,10 +123,17 @@ def main():
 
     replace_in_filenames_and_content(current_directory, placeholder, clear_placeholder, new_name)
 
-    remove_git_related_files(current_directory)
+    print("\n")
+    print("The replacement is complete. ")
 
     print("\n")
-    input("The replacement is complete. To finish, press any key...")
+    delete_git_choice = input("Delete files related to .git (if available)? (y/n)")
+
+    if delete_git_choice == 'y':
+        remove_git_related_files(current_directory)
+
+    print("\n")
+    input("Files related to .git deleted. To finish, press any key...")
 
     sys.exit()
 
