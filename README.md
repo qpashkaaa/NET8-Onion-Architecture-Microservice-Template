@@ -28,9 +28,6 @@ _____
 - **With the help of *Initializer.exe* you can change the name of your project and solution to a new one, even if the tag in the names is no longer there. You need to select "Use your own tag to replace" when starting the application. and act according to the instructions.**
 - **After changing the names of the projects, the file *Initializer.exe* you can delete it from the project if it is no longer needed.**
 
-## Possible problems
-- **If you want to change the name of the project after replacing the tag (re-replacing), then I recommend deleting the folder ".vs" to avoid possible problems (this folder is hidden and before that you need to enable the display of hidden folders in Windows).**
-
 ## About my library (NuGet)
 > To make the deployment of the microservice even more enjoyable, you can use our library, which is located in NuGet - ***AspNetCoreMicroserviceInitializer.TradingDesk***.
 - [Project on GitHub and docs](https://github.com/qpashkaaa/Asp-Net-Core-Microservice-Initializer)
@@ -46,6 +43,8 @@ import stat
 
 def replace_in_filenames_and_content(directory, placeholder, clear_placeholder, new_name):
     for root, dirs, files in os.walk(directory):
+        dirs[:] = [d for d in dirs if not d.startswith('.')]
+
         for i, dir_name in enumerate(dirs):
             if placeholder in dir_name:
                 new_dir_name = dir_name.replace(placeholder, new_name)
