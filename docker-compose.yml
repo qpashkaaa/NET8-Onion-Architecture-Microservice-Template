@@ -1,0 +1,36 @@
+version: "3.9"
+
+networks:
+  app-network:
+
+services:
+
+  migrator:
+    build:
+      context: ./
+      dockerfile: $safeprojectname$.Migrator/Dockerfile
+    container_name: migrator
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      TZ: "Europe/Moscow"
+    ports:
+      - "8081:8080"
+    networks:
+      - app-network
+
+  server:
+    build:
+      context: ./
+      dockerfile: $safeprojectname$.Server/Dockerfile
+    container_name: server
+    depends_on:
+      migrator:
+        condition: service_completed_successfully
+    environment:
+      TZ: "Europe/Moscow"
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
